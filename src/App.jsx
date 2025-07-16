@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PaymentInterface from './PaymentInterface';
 
 const categories = [
   { id: 'pain-fever', name: 'Pain & Fever', icon: '🤒' },
@@ -443,7 +444,7 @@ export default function OTCVendingMachine() {
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
+  const [showPayment, setShowPayment] = useState(false)
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setCurrentScreen('products');
@@ -677,7 +678,7 @@ export default function OTCVendingMachine() {
               Clear Cart
             </button>
             <button
-              onClick={() => alert('Payment processing... Thank you for your purchase!')}
+              onClick={() => setShowPayment(true)}
               style={styles.proceedButton}
               onMouseEnter={(e) => e.target.style.backgroundColor = '#059669'}
               onMouseLeave={(e) => e.target.style.backgroundColor = '#10b981'}
@@ -785,8 +786,7 @@ export default function OTCVendingMachine() {
             </button>
             <button
               onClick={() => {
-                alert('Payment processing... Thank you for your purchase!');
-                setCart([]);
+                setShowPayment(true);
                 setIsCartOpen(false);
               }}
               style={styles.proceedButton}
@@ -811,6 +811,24 @@ export default function OTCVendingMachine() {
     <div style={styles.footer}>
       <p style={styles.footerText}>For medical emergencies, please contact your healthcare provider immediately.</p>
     </div>
+
+    {showPayment && (
+  <>
+    {console.log('🔍 totalPrice =', totalPrice, '| totalItems =', totalItems)}
+    <PaymentInterface
+      totalPrice={totalPrice}
+      totalItems={totalItems}
+      onClose={() => setShowPayment(false)}
+      onPaymentComplete={() => {
+        alert('Payment successful! Thank you for your purchase!');
+        setCart([]);
+        setIsCartOpen(false);
+        setShowPayment(false);
+      }}
+    />
+  </>
+)}
   </div>
+  
 );
 }
