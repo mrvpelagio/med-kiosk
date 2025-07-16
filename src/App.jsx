@@ -48,7 +48,7 @@ const styles = {
   bottom: 0,
   left: 0,
   right: 0,
-  maxHeight: '70vh',
+  height: '75vh', // reduced from 70vh
   backgroundColor: 'white',
   borderTopLeftRadius: '16px',
   borderTopRightRadius: '16px',
@@ -56,6 +56,8 @@ const styles = {
   padding: '24px',
   zIndex: 1000,
   transition: 'transform 0.3s ease-in-out',
+  display: 'flex',
+  flexDirection: 'column',
 },
 cartDrawerVisible: {
   transform: 'translateY(0%)'
@@ -406,6 +408,28 @@ cartDrawerHidden: {
   },
   spacer: {
     width: '80px'
+  },
+  viewCartButton: {
+  position: 'fixed',
+  bottom: '16px',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  backgroundColor: '#10b981',
+  color: 'white',
+  padding: '12px 24px',
+  borderRadius: '24px',
+  fontWeight: '600',
+  fontSize: '16px',
+  boxShadow: '0 4px 8px rgba(0,0,0,0.15)',
+  border: 'none',
+  cursor: 'pointer',
+  zIndex: 900
+},
+  cartDrawerHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '12px'
   }
 };
 
@@ -697,7 +721,7 @@ export default function OTCVendingMachine() {
     <div
       style={{
         ...styles.cartDrawer,
-        ...(isCartOpen ? {} : styles.hiddenDrawer)
+        ...(isCartOpen ? styles.cartDrawerVisible : styles.cartDrawerHidden)
       }}
     >
       <div style={styles.cartDrawerHeader}>
@@ -709,6 +733,7 @@ export default function OTCVendingMachine() {
           ✕
         </button>
       </div>
+      
 
       {cart.length === 0 ? (
         <div style={styles.emptyCart}>
@@ -774,6 +799,14 @@ export default function OTCVendingMachine() {
         </div>
       )}
     </div>
+        {totalItems > 0 && !isCartOpen && (
+      <button
+        style={styles.viewCartButton}
+        onClick={() => setIsCartOpen(true)}
+      >
+        🛒 View Cart ({totalItems})
+      </button>
+    )}
 
     <div style={styles.footer}>
       <p style={styles.footerText}>For medical emergencies, please contact your healthcare provider immediately.</p>
