@@ -306,6 +306,7 @@ const PaymentInterface = ({ totalPrice, totalItems, onClose, onPaymentComplete, 
       borderRadius: '6px',
       fontSize: '16px',
       marginBottom: '12px',
+      boxSizing: 'border-box',
     },
     changeInfo: {
       display: 'flex',

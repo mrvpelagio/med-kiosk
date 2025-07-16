@@ -818,12 +818,14 @@ export default function OTCVendingMachine() {
     <PaymentInterface
       totalPrice={totalPrice}
       totalItems={totalItems}
+      cart = {cart}
       onClose={() => setShowPayment(false)}
       onPaymentComplete={() => {
         alert('Payment successful! Thank you for your purchase!');
         setCart([]);
         setIsCartOpen(false);
         setShowPayment(false);
+        setCurrentScreen('categories');
       }}
     />
   </>
