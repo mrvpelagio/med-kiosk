@@ -43,6 +43,34 @@ const products = {
 };
 
 const styles = {
+  cartDrawer: {
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+  right: 0,
+  maxHeight: '70vh',
+  backgroundColor: 'white',
+  borderTopLeftRadius: '16px',
+  borderTopRightRadius: '16px',
+  boxShadow: '0 -4px 12px rgba(0,0,0,0.1)',
+  padding: '24px',
+  zIndex: 1000,
+  transition: 'transform 0.3s ease-in-out',
+},
+cartDrawerVisible: {
+  transform: 'translateY(0%)'
+},
+cartDrawerHidden: {
+  transform: 'translateY(100%)'
+},
+  closeDrawerButton: {
+    background: 'none',
+    border: 'none',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    color: '#6b7280'
+  },
   container: {
     minHeight: '100vh',
     background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
@@ -382,6 +410,7 @@ const styles = {
 };
 
 export default function OTCVendingMachine() {
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentScreen, setCurrentScreen] = useState('categories');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -638,36 +667,117 @@ export default function OTCVendingMachine() {
   );
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <div style={styles.headerContent}>
-          <h1 style={styles.headerTitle}>OTC Vending Machine</h1>
-          <button
-            onClick={() => setCurrentScreen('cart')}
-            style={styles.cartButton}
-            onMouseEnter={(e) => e.target.style.backgroundColor = '#60a5fa'}
-            onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
-          >
-            🛒 Cart
-            {totalItems > 0 && (
-              <span style={styles.cartBadge}>
-                {totalItems}
-              </span>
-            )}
-          </button>
-        </div>
-      </div>
-
-      <div style={{ minHeight: '100vh' }}>
-        {currentScreen === 'categories' && <CategoriesScreen />}
-        {currentScreen === 'products' && <ProductsScreen />}
-        {currentScreen === 'product-detail' && <ProductDetailScreen />}
-        {currentScreen === 'cart' && <CartScreen />}
-      </div>
-
-      <div style={styles.footer}>
-        <p style={styles.footerText}>For medical emergencies, please contact your healthcare provider immediately.</p>
+  <div style={styles.container}>
+    <div style={styles.header}>
+      <div style={styles.headerContent}>
+        <h1 style={styles.headerTitle}>OTC Vending Machine</h1>
+        <button
+          onClick={() => setIsCartOpen(true)}
+          style={styles.cartButton}
+          onMouseEnter={(e) => e.target.style.backgroundColor = '#60a5fa'}
+          onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
+        >
+          🛒 Cart
+          {totalItems > 0 && (
+            <span style={styles.cartBadge}>
+              {totalItems}
+            </span>
+          )}
+        </button>
       </div>
     </div>
-  );
+
+    <div style={{ minHeight: '100vh' }}>
+      {currentScreen === 'categories' && <CategoriesScreen />}
+      {currentScreen === 'products' && <ProductsScreen />}
+      {currentScreen === 'product-detail' && <ProductDetailScreen />}
+    </div>
+
+    {/* Pull-up Cart Drawer */}
+    <div
+      style={{
+        ...styles.cartDrawer,
+        ...(isCartOpen ? {} : styles.hiddenDrawer)
+      }}
+    >
+      <div style={styles.cartDrawerHeader}>
+        <h2>Your Cart</h2>
+        <button
+          onClick={() => setIsCartOpen(false)}
+          style={styles.closeDrawerButton}
+        >
+          ✕
+        </button>
+      </div>
+
+      {cart.length === 0 ? (
+        <div style={styles.emptyCart}>
+          <div style={styles.emptyCartIcon}>🛒</div>
+          <p style={styles.emptyCartText}>Your cart is empty</p>
+        </div>
+      ) : (
+        <div style={{ maxWidth: '512px', margin: '0 auto' }}>
+          {cart.map((item) => (
+            <div key={item.id} style={styles.cartItem}>
+              <div style={styles.cartItemContent}>
+                <div style={styles.cartItemLeft}>
+                  <span style={styles.cartItemIcon}>{item.image}</span>
+                  <div>
+                    <div style={styles.cartItemName}>{item.name}</div>
+                    <div style={styles.cartItemQty}>Qty: {item.quantity}</div>
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={styles.cartItemPrice}>₱{(item.price * item.quantity).toFixed(2)}</div>
+                  <button
+                    onClick={() => handleRemoveFromCart(item.id)}
+                    style={styles.removeButton}
+                    onMouseEnter={(e) => e.target.style.color = '#dc2626'}
+                    onMouseLeave={(e) => e.target.style.color = '#ef4444'}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div style={styles.cartTotal}>
+            <div style={styles.cartTotalContent}>
+              <span style={styles.cartTotalLabel}>Total ({totalItems} items)</span>
+              <span style={styles.cartTotalPrice}>₱{totalPrice.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <div style={styles.buttonGroup}>
+            <button
+              onClick={() => setCart([])}
+              style={styles.clearButton}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#dc2626'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#ef4444'}
+            >
+              Clear Cart
+            </button>
+            <button
+              onClick={() => {
+                alert('Payment processing... Thank you for your purchase!');
+                setCart([]);
+                setIsCartOpen(false);
+              }}
+              style={styles.proceedButton}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#059669'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#10b981'}
+            >
+              Proceed to Payment
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+
+    <div style={styles.footer}>
+      <p style={styles.footerText}>For medical emergencies, please contact your healthcare provider immediately.</p>
+    </div>
+  </div>
+);
 }
