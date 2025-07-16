@@ -12,34 +12,34 @@ const categories = [
 
 const products = {
   'pain-fever': [
-    { id: 1, name: 'Biogesic', desc: 'Paracetamol 500mg Tablet for headache & fever', price: 7.0, image: '🟡', stock: 25 },
-    { id: 2, name: 'Advil', desc: 'Ibuprofen 200mg Capsule', price: 12.0, image: '🔴', stock: 18 },
-    { id: 3, name: 'Aspirin', desc: 'Acetylsalicylic Acid 325mg', price: 8.5, image: '⚪', stock: 30 },
-    { id: 4, name: 'Tylenol', desc: 'Paracetamol 500mg Extra Strength', price: 15.0, image: '🔵', stock: 12 },
+    { id: 1, name: 'Biogesic', desc: 'Paracetamol 500mg Tablet for headache & fever', price: 7.0, image: '/images/biogesic.png', stock: 25 },
+    { id: 2, name: 'Advil', desc: 'Ibuprofen 200mg Capsule', price: 12.0, image: '/images/advil.jpg', stock: 18 },
+    { id: 3, name: 'Aspirin', desc: 'Acetylsalicylic Acid 325mg', price: 8.5, image: '/images/aspirin.jpg', stock: 30 },
+    { id: 4, name: 'Tylenol', desc: 'Paracetamol 500mg Extra Strength', price: 15.0, image: '/images/tylenol.jpg', stock: 12 },
   ],
   'cough-cold': [
-    { id: 5, name: 'Robitussin', desc: 'Cough Syrup 100ml', price: 18.0, image: '🟤', stock: 15 },
-    { id: 6, name: 'Strepsils', desc: 'Throat Lozenges 12 pieces', price: 10.0, image: '🟢', stock: 22 },
-    { id: 7, name: 'Neozep', desc: 'Cold Relief Capsules', price: 9.5, image: '🟡', stock: 20 },
+    { id: 5, name: 'Robitussin', desc: 'Cough Syrup 100ml', price: 18.0, image: '/images/placeholder.png', stock: 15 },
+    { id: 6, name: 'Strepsils', desc: 'Throat Lozenges 12 pieces', price: 10.0, image: '/images/placeholder.png', stock: 22 },
+    { id: 7, name: 'Neozep', desc: 'Cold Relief Capsules', price: 9.5, image: '/images/placeholder.png', stock: 20 },
   ],
   'stomach': [
-    { id: 8, name: 'Pepto-Bismol', desc: 'Stomach Relief 120ml', price: 14.0, image: '🩷', stock: 16 },
-    { id: 9, name: 'Imodium', desc: 'Anti-diarrheal Capsules', price: 11.0, image: '🔵', stock: 19 },
-    { id: 10, name: 'Tums', desc: 'Antacid Tablets 12 pieces', price: 8.0, image: '⚪', stock: 25 },
+    { id: 8, name: 'Pepto-Bismol', desc: 'Stomach Relief 120ml', price: 14.0, image: '/images/placeholder.png', stock: 16 },
+    { id: 9, name: 'Imodium', desc: 'Anti-diarrheal Capsules', price: 11.0, image: '/images/placeholder.png', stock: 19 },
+    { id: 10, name: 'Tums', desc: 'Antacid Tablets 12 pieces', price: 8.0, image: '/images/placeholder.png', stock: 25 },
   ],
   'allergy': [
-    { id: 11, name: 'Benadryl', desc: 'Antihistamine 25mg Tablets', price: 13.0, image: '🟣', stock: 14 },
-    { id: 12, name: 'Claritin', desc: 'Loratadine 10mg Non-drowsy', price: 16.0, image: '🔵', stock: 18 },
+    { id: 11, name: 'Benadryl', desc: 'Antihistamine 25mg Tablets', price: 13.0, image: '/images/placeholder.png', stock: 14 },
+    { id: 12, name: 'Claritin', desc: 'Loratadine 10mg Non-drowsy', price: 16.0, image: '/images/placeholder.png', stock: 18 },
   ],
   'vitamins': [
-    { id: 13, name: 'Vitamin C', desc: '500mg Immune Support', price: 12.0, image: '🟠', stock: 30 },
-    { id: 14, name: 'Centrum', desc: 'Multivitamin 30 tablets', price: 25.0, image: '🟡', stock: 12 },
-    { id: 15, name: 'Calcium', desc: 'Calcium + Vitamin D3', price: 18.0, image: '⚪', stock: 20 },
+    { id: 13, name: 'Vitamin C', desc: '500mg Immune Support', price: 12.0, image: '/images/placeholder.png', stock: 30 },
+    { id: 14, name: 'Centrum', desc: 'Multivitamin 30 tablets', price: 25.0, image: '/images/placeholder.png', stock: 12 },
+    { id: 15, name: 'Calcium', desc: 'Calcium + Vitamin D3', price: 18.0, image: '/images/placeholder.png', stock: 20 },
   ],
   'first-aid': [
-    { id: 16, name: 'Band-Aid', desc: 'Adhesive Bandages 20 pieces', price: 6.0, image: '🩹', stock: 40 },
-    { id: 17, name: 'Betadine', desc: 'Antiseptic Solution 15ml', price: 8.0, image: '🟤', stock: 25 },
-    { id: 18, name: 'Alcohol', desc: 'Isopropyl Alcohol 70% 60ml', price: 5.0, image: '🔵', stock: 35 },
+    { id: 16, name: 'Band-Aid', desc: 'Adhesive Bandages 20 pieces', price: 6.0, image: '/images/placeholder.png', stock: 40 },
+    { id: 17, name: 'Betadine', desc: 'Antiseptic Solution 15ml', price: 8.0, image: '/images/placeholder.png', stock: 25 },
+    { id: 18, name: 'Alcohol', desc: 'Isopropyl Alcohol 70% 60ml', price: 5.0, image: '/images/placeholder.png', stock: 35 },
   ],
 };
 
@@ -431,7 +431,27 @@ cartDrawerHidden: {
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: '12px'
-  }
+  },
+  productImage: {
+  width: '120px',
+  height: '120px',
+  objectFit: 'contain',
+  marginBottom: '12px',
+  display: 'block',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  },
+  productDetailImage: {
+  width: '120px',
+  height: '120px',
+  objectFit: 'contain',
+  borderRadius: '8px',
+  marginBottom: '16px',
+  display: 'block',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  backgroundColor: '#f9fafb'
+  },
 };
 
 export default function OTCVendingMachine() {
@@ -531,7 +551,8 @@ export default function OTCVendingMachine() {
               e.target.style.borderColor = '#bfdbfe';
             }}
           >
-            <span style={styles.productIcon}>{product.image}</span>
+            <img src={product.image} alt={product.name} style={styles.productImage} />
+
             <div style={styles.productName}>{product.name}</div>
             <div style={styles.productDesc}>{product.desc}</div>
             <div style={styles.productPrice}>₱{product.price.toFixed(2)}</div>
@@ -559,7 +580,11 @@ export default function OTCVendingMachine() {
 
       <div style={styles.productDetail}>
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <span style={styles.productDetailIcon}>{selectedProduct.image}</span>
+          <img
+              src={selectedProduct.image}
+              alt={selectedProduct.name}
+              style={styles.productDetailImage}
+            />
           <h3 style={styles.productDetailName}>{selectedProduct.name}</h3>
           <p style={styles.productDetailDesc}>{selectedProduct.desc}</p>
           <div style={styles.productDetailPrice}>₱{selectedProduct.price.toFixed(2)}</div>
@@ -640,7 +665,17 @@ export default function OTCVendingMachine() {
             <div key={item.id} style={styles.cartItem}>
               <div style={styles.cartItemContent}>
                 <div style={styles.cartItemLeft}>
-                  <span style={styles.cartItemIcon}>{item.image}</span>
+                  <img
+                  src={item.image || '/images/placeholder.png'}  
+                  alt={item.name}
+                  style={{
+                    width: '48px',
+                    height: '48px',
+                    objectFit: 'contain',
+                    borderRadius: '8px',
+                    backgroundColor: '#f9fafb'
+                  }}
+                />
                   <div>
                     <div style={styles.cartItemName}>{item.name}</div>
                     <div style={styles.cartItemQty}>Qty: {item.quantity}</div>
@@ -747,7 +782,17 @@ export default function OTCVendingMachine() {
             <div key={item.id} style={styles.cartItem}>
               <div style={styles.cartItemContent}>
                 <div style={styles.cartItemLeft}>
-                  <span style={styles.cartItemIcon}>{item.image}</span>
+                  <img
+  src={item.image || '/images/placeholder.png'}
+  alt={item.name}
+  style={{
+    width: '48px',
+    height: '48px',
+    objectFit: 'contain',
+    borderRadius: '8px',
+    backgroundColor: '#f9fafb'
+  }}
+/>
                   <div>
                     <div style={styles.cartItemName}>{item.name}</div>
                     <div style={styles.cartItemQty}>Qty: {item.quantity}</div>
